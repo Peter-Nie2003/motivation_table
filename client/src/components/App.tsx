@@ -11,14 +11,17 @@ import NotFound from "./pages/NotFound";
 import Skeleton from "./pages/Skeleton";
 import { socket } from "../client-socket";
 import User from "../../../shared/User";
+import NavBar from "./modules/NavBar";
 import "../utilities.css";
 
 const App = () => {
-  const [userId, setUserId] = useState<string | undefined>(undefined);
-
 
   return (
-    <div> this is a new app</div>
+
+    <div>
+    <NavBar/>
+      this is a new app
+    </div>
   );
 };
 
