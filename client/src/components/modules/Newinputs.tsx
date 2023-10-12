@@ -29,7 +29,7 @@ export default function Newinputs(){
             difficulty:difficulty,
             interest:interest,
         };
-        post('api/newTasks',body);
+        post('/api/newTasks',body);
     }
     return(
         <div className="u-flex">

@@ -4,7 +4,7 @@
   "description": "to do list app",
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
-    "start": "nodemon --watch server/**/*.ts --exec ts-node server/server.ts",
+    "start": "nodemon --exec ts-node server/server.ts",
     "build": "webpack --config ./webpack.config.js --mode production"
   },
   "author": "johanc",
