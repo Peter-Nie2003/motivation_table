@@ -11,12 +11,14 @@ import { socket } from "../client-socket";
 import User from "../../../shared/User";
 import NavBar from "./modules/NavBar";
 import "../utilities.css";
+import Schedule from "./modules/Schedule";
 
 const App = () => {
 
   return (
     <div>
       <NavBar/>
+      <Schedule/>
     </div>
   );
 };

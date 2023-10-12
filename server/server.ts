@@ -1,24 +1,20 @@
-// |---------------------------------------------------------------------|
-// |the skeleton code Copyright (c) MIT 6.9620 Web Lab: A Programming Class and Competition|
-// |---------------------------------------------------------------------|
 import express, { Request, Response } from "express";
 import http from "http";
 import session from "express-session"; // Allows us to store information about a client
+import mongoose from "mongoose"; // Wrapper around MongoDB
+import morgan from "morgan"; // Request logger (https://github.com/expressjs/morgan). Can be removed if you wish.
 import path from "path"; // Allows us to retrieve file paths
 import api from "./api";
-import mongoose from "mongoose";
 
 //allow us to use process.ENV
 require("dotenv").config();
 
-// Create a new Express server
-const app = express();
+// Server configuration below
+// TODO change connection URL after setting up your team database and creating the .env file
+const mongoConnectionURL = process.env.MONGO_SRV;
+// TODO change database name to the name you chose
+const databaseName = "xxxxx";
 
-// Middleware setup.
-app.use(express.json());
-app.use("/api", api);
-const mongoConnectionURL =process.env.MONGO_SRV;
-const databaseName = "motivation-table"
 if (mongoConnectionURL === undefined) {
   throw new Error("Please add the MongoDB connection SRV as 'MONGO_SRV'");
 }
@@ -30,6 +26,15 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
+
+// Create a new Express server
+const app = express();
+
+// Middleware setup.
+app.use(express.json());
+app.use(morgan("dev")); // To change the format of logs: https://github.com/expressjs/morgan#predefined-formats
+app.use("/api", api);
+
 // Serves the frontend code
 const reactPath = path.resolve(__dirname, "..", "client", "dist");
 app.use(express.static(reactPath));
@@ -40,7 +45,7 @@ app.use(express.static(reactPath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(reactPath, "index.html"));
 });
- 
+
 // Optional TODO (on your own) - Add an error interface.
 app.use((err: any, _req: Request, res: Response) => {
   const status = err.status || 500;
