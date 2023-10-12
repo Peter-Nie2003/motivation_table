@@ -6,6 +6,7 @@ import http from "http";
 import session from "express-session"; // Allows us to store information about a client
 import path from "path"; // Allows us to retrieve file paths
 import api from "./api";
+import mongoose from "mongoose";
 
 //allow us to use process.ENV
 require("dotenv").config();
@@ -16,7 +17,19 @@ const app = express();
 // Middleware setup.
 app.use(express.json());
 app.use("/api", api);
-
+const mongoConnectionURL =process.env.MONGO_SRV;
+const databaseName = "motivation-table"
+if (mongoConnectionURL === undefined) {
+  throw new Error("Please add the MongoDB connection SRV as 'MONGO_SRV'");
+}
+mongoose
+  .connect(mongoConnectionURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: databaseName,
+  })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 // Serves the frontend code
 const reactPath = path.resolve(__dirname, "..", "client", "dist");
 app.use(express.static(reactPath));
@@ -27,7 +40,7 @@ app.use(express.static(reactPath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(reactPath, "index.html"));
 });
-
+ 
 // Optional TODO (on your own) - Add an error interface.
 app.use((err: any, _req: Request, res: Response) => {
   const status = err.status || 500;
