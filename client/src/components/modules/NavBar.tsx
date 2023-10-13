@@ -2,6 +2,7 @@ import React from 'react';
 import "../../utilities.css"
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function NavBar() {
     return (
@@ -10,6 +11,7 @@ function NavBar() {
                 <Navbar.Brand className="NavBar-title">Motivation-table</Navbar.Brand>
             </Container>
         </Navbar>
+        
     );
 }
 

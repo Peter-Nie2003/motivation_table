@@ -3,6 +3,7 @@ import Newinputs from "./Newinputs";
 import { get } from "../../utilities";
 import taskSchema from "../../../../shared/Tasks"
 import TaskCard from "./TaskCard";
+import SubmitButton from "./SubmitButton";
 
 
 export default function Schedule(){
@@ -28,6 +29,7 @@ export default function Schedule(){
     }
     return(
         <div>
+            <SubmitButton/>
             <Newinputs/>
             {tasksLists}
         </div>
