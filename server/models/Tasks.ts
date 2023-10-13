@@ -9,11 +9,11 @@ const taskSchema = new Schema( {
 });
 
 export interface taskSchema extends Document{
-    name:String,
-    difficulty:Number,
-    interest:Number,
-    due_dy:String,
-    _id:String,
+    name:string,
+    difficulty:number,
+    interest:number,
+    due_dy:string,
+    _id:string,
 };
 
 const tasksObject = model<taskSchema>("tasks", taskSchema);
