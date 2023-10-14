@@ -13,8 +13,8 @@ const App = () => {
 
   return (
     <div>
-      <NavBar/>
-      <Schedule/>
+      <NavBar />
+      <Schedule />
     </div>
   );
 };

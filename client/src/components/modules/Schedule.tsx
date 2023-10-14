@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from "react";
-import Newinputs from "./Newinputs";
 import { get } from "../../utilities";
 import taskSchema from "../../../../shared/Tasks"
 import TaskCard from "./TaskCard";
 import SubmitButton from "./SubmitButton";
 
 
-export default function Schedule(){
+export default function Schedule() {
     const [tasksObject, tasksObjectSetter] = useState([]);
-    useEffect(() =>{
-        get("/api/tasks").then((tasks) =>{
+    useEffect(() => {
+        get("/api/tasks").then((tasks) => {
             tasksObjectSetter(tasks);
         })
     });
-    let tasksLists:React.ReactNode | null = null;
-    const haveTasks:boolean = tasksObject.length !== 0;
-    if(haveTasks){
-        tasksLists = tasksObject.map((task:taskSchema) =>(
+    let tasksLists: React.ReactNode | null = null;
+    const haveTasks: boolean = tasksObject.length !== 0;
+    if (haveTasks) {
+        tasksLists = tasksObject.map((task: taskSchema) => (
             <TaskCard
-            name = {task.name}
-            difficulty={task.difficulty}
-            due_dy={task.due_dy}
-            interest={task.interest}
+                name={task.name}
+                difficulty={task.difficulty}
+                due_dy={task.due_dy}
+                interest={task.interest}
             />
         ));
-    }else{
+    } else {
         tasksLists = <div>no tasks here</div>;
     }
-    return(
+    return (
         <div>
-            <SubmitButton/>
-            <Newinputs/>
+            <SubmitButton />
             {tasksLists}
         </div>
     );
