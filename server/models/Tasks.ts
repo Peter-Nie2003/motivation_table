@@ -3,7 +3,7 @@ import { Schema, Document, model } from "mongoose";
 //define a schema for the tasks
 const taskSchema = new Schema({
     name: String,
-    difficulty: Number,
+    confident: Number,
     interest: Number,
     due_dy: String,
     value: Number,
@@ -11,7 +11,7 @@ const taskSchema = new Schema({
 
 export interface taskSchema extends Document {
     name: string,
-    difficulty: number,
+    confident: number,
     interest: number,
     due_dy: string,
     value: number,

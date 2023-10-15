@@ -12,7 +12,7 @@ function SubmitButton() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [name, nameSetter] = useState<string>('');
-  const [difficulty, difficultySetter] = useState<number>(0);
+  const [confident, confidentSetter] = useState<number>(0);
   const [interest, interestSetter] = useState<number>(0);
   const [selectDate, setSelectDate] = useState(new Date());
   // function handle the input change and submit
@@ -20,9 +20,9 @@ function SubmitButton() {
     nameSetter(event.target.value);
   }
 
-  const handleDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleConfident = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    difficultySetter(parseInt(value));
+    confidentSetter(parseInt(value));
   }
   const handleInterest = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -32,7 +32,8 @@ function SubmitButton() {
     const body = {
       name: name,
       dueDate: selectDate.toDateString(),
-      difficulty: difficulty,
+      time: selectDate.getTime(),
+      confident: confident,
       interest: interest,
     };
     post('/api/newTasks', body);
@@ -58,22 +59,22 @@ function SubmitButton() {
         </Modal.Header>
         <Modal.Body>
           <FloatingLabel
-            controlId="floatingInput1"
+            controlId="floatingInput"
             label="name"
             className="mb-3"
           >
             <Form.Control type="name" onChange={handleName} />
           </FloatingLabel>
           <FloatingLabel
-            controlId="floatingInput3"
-            label="0"
+            controlId="floatingInput"
+            label="confident"
             className="mb-3"
           >
-            <Form.Control type="name" onChange={handleDifficulty} />
+            <Form.Control type="confident rate" onChange={handleConfident} />
           </FloatingLabel>
           <FloatingLabel
-            controlId="floatingInput4"
-            label="0"
+            controlId="floatingInput"
+            label="interest"
             className="mb-3"
           >
             <Form.Control type="Interest rate" onChange={handleInterest} />

@@ -18,7 +18,7 @@ export default function Schedule() {
         tasksLists = tasksObject.map((task: taskSchema) => (
             <TaskCard
                 name={task.name}
-                difficulty={task.difficulty}
+                confident={task.confident}
                 due_dy={task.due_dy}
                 interest={task.interest}
             />

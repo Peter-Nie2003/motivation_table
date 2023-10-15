@@ -12,11 +12,20 @@ router.get("/tasks", (req: Request, res: Response) => {
   tasksObject.find({}).then((tasks) => (res.send(tasks)));
 })
 router.post("/newTasks", (req: Request, res: Response) => {
+  const date = new Date();
+  const calcualteValue = () => {
+    const nomiator: number = req.body.interest * req.body.confident;
+    const denominator: number = (req.body.time - date.getTime()) / (1000 * 3600 * 24);
+    return nomiator / denominator;
+  }
+  const motivationValue: number = calcualteValue();
+  console.log(motivationValue)
   const newTasks = new tasksObject({
     name: req.body.name,
-    difficulty: req.body.difficulty,
+    confident: req.body.confident,
     interest: req.body.interest,
     due_dy: req.body.dueDate,
+    value: motivationValue,
   }
   )
   newTasks.save().then((task) => res.send(task));

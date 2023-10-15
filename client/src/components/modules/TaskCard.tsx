@@ -2,7 +2,7 @@ import React from "react";
 
 interface TaskCardProps {
     name: string,
-    difficulty: number,
+    confident: number,
     interest: number,
     due_dy: string,
 }
@@ -12,7 +12,7 @@ export default function TaskCard(props: TaskCardProps) {
         <div>
             <li>
                 {props.name}
-                {props.difficulty}
+                {props.confident}
                 {props.interest}
                 {props.due_dy} {/* Use the 'date' variable, which contains the formatted date */}
             </li>
