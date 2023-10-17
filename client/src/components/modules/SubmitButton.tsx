@@ -15,6 +15,7 @@ function SubmitButton() {
   const [confident, confidentSetter] = useState<number>(0);
   const [interest, interestSetter] = useState<number>(0);
   const [selectDate, setSelectDate] = useState(new Date());
+  const [type,setType]=useState(0)
   // function handle the input change and submit
   const handleName = (event: ChangeEvent<HTMLInputElement>) => {
     nameSetter(event.target.value);
@@ -28,6 +29,10 @@ function SubmitButton() {
     const value = event.target.value;
     interestSetter(parseInt(value));
   }
+  const handleType = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setType(parseInt(value));
+  }
   const handleSubmit = () => {
     const body = {
       name: name,
@@ -36,6 +41,7 @@ function SubmitButton() {
       confident: confident,
       interest: interest,
       done: false,
+      workSpace:type,
     };
     post('/api/newTasks', body);
   }
@@ -66,6 +72,8 @@ function SubmitButton() {
             <Form.Control type="confident rate" onChange={handleConfident} />
             <Form.Label htmlFor="inputInterest">intereset</Form.Label>
             <Form.Control type="Interest rate" onChange={handleInterest} />
+            <Form.Label htmlFor="inputType">Type</Form.Label>
+            <Form.Control type="Type of task" onChange={handleType} />
             <div style={{ marginTop: '20px' }}>
               Date
             </div>
