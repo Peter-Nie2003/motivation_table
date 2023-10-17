@@ -1,10 +1,19 @@
 import express, { Request, Response } from "express";
 import http from "http";
 import mongoose from "mongoose"; // Wrapper around MongoDB
+import { MongoClient } from "mongodb"
 import morgan from "morgan"; // Request logger (https://github.com/expressjs/morgan). Can be removed if you wish.
 import path from "path"; // Allows us to retrieve file paths
 import api from "./api";
-
+async function getDataBase(URL) {
+  const client = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology: true });
+  try {
+    await client.connect();
+  } catch (error) {
+    console.log('Error:', error);
+  }
+  return client.db("xxxxx");
+}
 //allow us to use process.ENV
 require("dotenv").config();
 
@@ -26,6 +35,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 
+
+
+export const database = getDataBase(mongoConnectionURL);
 // Create a new Express server
 const app = express();
 

@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import { get } from "../../utilities";
 import taskSchema from "../../../../shared/Tasks";
 import TaskCard from "./TaskCard";
-import SubmitButton from "./SubmitButton";
+import SubmitTasks from "./SubmitTasks";
 
 interface ListBlockProps {
-  id: number,
+  name: string,
 }
 function ListBlock(props: ListBlockProps) {
 
   const [List, setList] = useState([]);
 
   useEffect(() => {
-    get("/api/task", { id: props.id }).then((tasks) => {
-      setList(tasks);
+    get("/api/task", { name: props.name }).then((list) => {
+      setList(list);
     })
   });
 
   let todoList: React.ReactNode | null = null;
   const havetask: boolean = List.length !== 0;
-
   if (havetask) {
     todoList = List.map((task: taskSchema) => (
       <TaskCard
+        key={task.name}
         name={task.name}
         confident={task.confident}
         due_dy={task.due_dy}
@@ -33,11 +33,14 @@ function ListBlock(props: ListBlockProps) {
     ));
   } else {
     todoList = <div>There is no task in this type</div>
-
   }
+
   return (
     <div>
-      <SubmitButton />
+      {props.name}
+      <SubmitTasks
+        id={props.name}
+      />
       {todoList}
     </div>
 
@@ -45,4 +48,4 @@ function ListBlock(props: ListBlockProps) {
 
 
 }
-export default ListBlock
+export default ListBlock;

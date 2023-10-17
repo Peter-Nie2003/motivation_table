@@ -1,19 +1,27 @@
 import express, { Request, Response } from "express";
 import tasksObject from "./models/Tasks";
+import listObject from "./models/Lists";
+import { database } from "./server";
 const router = express.Router();
 
 
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+router.get("/getLists", (req: Request, res: Response) => {
+  listObject.find({}).then((listObject) => (res.send(listObject)));
 
-
+})
 router.get("/tasks", (req: Request, res: Response) => {
   tasksObject.find({}).then((tasks) => (res.send(tasks)));
 })
-
-router.get("/task", (req: Request, res: Response) => {
-  tasksObject.find({ workSpace: req.body.id }).then((tasks) => (res.send(tasks)));
+interface foo {
+  name: string;
+}
+router.get("/task", async (req: Request<{}, {}, {}, foo>, res: Response) => {
+  const { query } = req;
+  const q = { workSpace: query.name }
+  const tasks = await tasksObject.find(
+    q
+  );
+  res.send(tasks);
 })
 
 function calcualteValue(interest: number, confident: number, time: number) {
@@ -30,6 +38,7 @@ async function upToDateTask() {
     await task.save();
   })
 }
+
 router.post("/newTasks", (req: Request, res: Response) => {
   const motivationValue: number = calcualteValue(req.body.interest, req.body.confident, req.body.time);
   console.log(motivationValue)
@@ -49,6 +58,14 @@ router.post("/newTasks", (req: Request, res: Response) => {
 router.post("/upToDateTask", (req: Request, res: Response) => {
   upToDateTask();
 })
+
+
+router.post("/addNewList", (req: Request, res: Response) => {
+  const newLists = new listObject({
+    name: req.body.name,
+  });
+  newLists.save().then((list) => res.send(list));
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

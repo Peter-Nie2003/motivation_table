@@ -6,8 +6,10 @@ import { Form, FloatingLabel, Col } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
-
-function SubmitButton() {
+interface submitTasksProps {
+  id: string;
+}
+function SubmitTasks(props: submitTasksProps) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,7 +43,7 @@ function SubmitButton() {
       confident: confident,
       interest: interest,
       done: false,
-      workSpace: type,
+      workSpace: props.id,
     };
     post('/api/newTasks', body);
     post('/api/upToDateTask');
@@ -94,4 +96,4 @@ function SubmitButton() {
   );
 }
 
-export default SubmitButton;
+export default SubmitTasks;

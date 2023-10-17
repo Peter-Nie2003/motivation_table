@@ -4,21 +4,17 @@
 import React, { useState, useEffect } from "react";
 
 
-import User from "../../../shared/User";
 import NavBar from "./modules/NavBar";
-import ListBlock from "./modules/ListBlock"
 import "../utilities.css";
 import Schedule from "./modules/Schedule";
+import ListBlock from "./modules/ListBlock";
 
 const App = () => {
 
   return (
     <div>
       <NavBar />
-      <ListBlock id={1}/>
-      <ListBlock id={2}/>
-      <ListBlock id={3}/>
-      <ListBlock id={4}/>
+      <Schedule />
     </div>
   );
 };
