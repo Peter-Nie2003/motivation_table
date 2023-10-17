@@ -15,7 +15,7 @@ function SubmitButton() {
   const [confident, confidentSetter] = useState<number>(0);
   const [interest, interestSetter] = useState<number>(0);
   const [selectDate, setSelectDate] = useState(new Date());
-  const [type,setType]=useState(0)
+  const [type, setType] = useState(0)
   // function handle the input change and submit
   const handleName = (event: ChangeEvent<HTMLInputElement>) => {
     nameSetter(event.target.value);
@@ -41,9 +41,10 @@ function SubmitButton() {
       confident: confident,
       interest: interest,
       done: false,
-      workSpace:type,
+      workSpace: type,
     };
     post('/api/newTasks', body);
+    post('/api/upToDateTask');
   }
   async function handleUnderstand() {
     await handleClose();

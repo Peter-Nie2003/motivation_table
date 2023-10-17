@@ -6,6 +6,7 @@ interface TaskCardProps {
     interest: number,
     due_dy: string,
     done: boolean,
+    value: number,
 }
 
 export default function TaskCard(props: TaskCardProps) {
