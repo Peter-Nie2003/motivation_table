@@ -21,6 +21,7 @@ export default function Schedule() {
                 confident={task.confident}
                 due_dy={task.due_dy}
                 interest={task.interest}
+                done={task.done}
             />
         ));
     } else {

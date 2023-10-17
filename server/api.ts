@@ -26,6 +26,7 @@ router.post("/newTasks", (req: Request, res: Response) => {
     interest: req.body.interest,
     due_dy: req.body.dueDate,
     value: motivationValue,
+    done: req.body.done,
   }
   )
   newTasks.save().then((task) => res.send(task));

@@ -7,6 +7,9 @@ const taskSchema = new Schema({
     interest: Number,
     due_dy: String,
     value: Number,
+    done: Boolean,
+    workSpace: String,
+
 });
 
 export interface taskSchema extends Document {
@@ -15,6 +18,8 @@ export interface taskSchema extends Document {
     interest: number,
     due_dy: string,
     value: number,
+    done: boolean,
+    workSpace: string,
     _id: string,
 };
 

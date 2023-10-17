@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { post } from "../../utilities"
-import { Form, FloatingLabel } from 'react-bootstrap';
+import { Form, FloatingLabel, Col } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -35,6 +35,7 @@ function SubmitButton() {
       time: selectDate.getTime(),
       confident: confident,
       interest: interest,
+      done: false,
     };
     post('/api/newTasks', body);
   }
@@ -58,28 +59,18 @@ function SubmitButton() {
           <Modal.Title>new tasks</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="name"
-            className="mb-3"
-          >
+          <Col>
+            <Form.Label htmlFor="inputName">name</Form.Label>
             <Form.Control type="name" onChange={handleName} />
-          </FloatingLabel>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="confident"
-            className="mb-3"
-          >
+            <Form.Label htmlFor="inputConfident">confident</Form.Label>
             <Form.Control type="confident rate" onChange={handleConfident} />
-          </FloatingLabel>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="interest"
-            className="mb-3"
-          >
+            <Form.Label htmlFor="inputInterest">intereset</Form.Label>
             <Form.Control type="Interest rate" onChange={handleInterest} />
-          </FloatingLabel>
-          <DatePicker selected={selectDate} onChange={(date) => setSelectDate(date)} />
+            <div style={{ marginTop: '20px' }}>
+              Date
+            </div>
+            <DatePicker selected={selectDate} onChange={(date) => setSelectDate(date)} />
+          </Col>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
