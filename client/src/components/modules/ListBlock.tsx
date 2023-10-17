@@ -42,3 +42,4 @@ function ListBlock (props:ListBlockProps){
 
 
 }
+export default ListBlock
