@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 router.get("/tasks", (req: Request, res: Response) => {
-  tasksObject.find({}).then((tasks) => (res.send(tasks)));
+  tasksObject.find({id:req.body}).then((tasks) => (res.send(tasks)));
 })
 router.post("/newTasks", (req: Request, res: Response) => {
   const date = new Date();
