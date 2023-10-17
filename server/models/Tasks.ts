@@ -8,7 +8,7 @@ const taskSchema = new Schema({
     due_dy: String,
     value: Number,
     done: Boolean,
-    workSpace: String,
+    workSpace: Number,
 
 });
 
@@ -19,7 +19,7 @@ export interface taskSchema extends Document {
     due_dy: string,
     value: number,
     done: boolean,
-    workSpace: string,
+    workSpace: number,
     _id: string,
 };
 

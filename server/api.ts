@@ -9,7 +9,11 @@ const router = express.Router();
 
 
 router.get("/tasks", (req: Request, res: Response) => {
-  tasksObject.find({id:req.body}).then((tasks) => (res.send(tasks)));
+  tasksObject.find({}).then((tasks) => (res.send(tasks)));
+})
+
+router.get("/task",(req: Request, res: Response)=>{
+  tasksObject.find({workSpace:req.query.id}).then((tasks)=>(res.send(tasks)));
 })
 router.post("/newTasks", (req: Request, res: Response) => {
   const date = new Date();
@@ -27,6 +31,7 @@ router.post("/newTasks", (req: Request, res: Response) => {
     due_dy: req.body.dueDate,
     value: motivationValue,
     done: req.body.done,
+    workSpace:req.body.workSpace,
   }
   )
   newTasks.save().then((task) => res.send(task));
