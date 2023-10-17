@@ -22,6 +22,7 @@ export default function Schedule() {
                 due_dy={task.due_dy}
                 interest={task.interest}
                 done={task.done}
+                value={task.value}
             />
         ));
     } else {
