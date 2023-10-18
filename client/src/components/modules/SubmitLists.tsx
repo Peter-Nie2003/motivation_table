@@ -26,7 +26,7 @@ function SubmitLists() {
     }
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={handleShow} className='medium-button'>
                 Launch demo modal
             </Button>
 

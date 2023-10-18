@@ -3,6 +3,7 @@ import { get } from "../../utilities";
 import listSchema from "../../../../shared/Lists";
 import ListBlock from "./ListBlock";
 import SubmitLists from "./SubmitLists";
+import "../../utilities.css"
 
 
 export default function Schedule() {
@@ -26,7 +27,7 @@ export default function Schedule() {
     }
     return (
 
-        <div>
+        <div className="container">
             <SubmitLists />
             {listList}
         </div>

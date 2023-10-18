@@ -3,6 +3,7 @@ import { get } from "../../utilities";
 import taskSchema from "../../../../shared/Tasks";
 import TaskCard from "./TaskCard";
 import SubmitTasks from "./SubmitTasks";
+import "../../utilities.css"
 
 interface ListBlockProps {
   name: string,
@@ -36,7 +37,7 @@ function ListBlock(props: ListBlockProps) {
   }
 
   return (
-    <div>
+    <div className="component">
       {props.name}
       <SubmitTasks
         id={props.name}
