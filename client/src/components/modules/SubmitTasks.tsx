@@ -5,6 +5,7 @@ import { post } from "../../utilities"
 import { Form, FloatingLabel, Col } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import "../../utilities.css"
 
 interface submitTasksProps {
   id: string;
@@ -17,7 +18,6 @@ function SubmitTasks(props: submitTasksProps) {
   const [confident, confidentSetter] = useState<number>(0);
   const [interest, interestSetter] = useState<number>(0);
   const [selectDate, setSelectDate] = useState(new Date());
-  const [type, setType] = useState(0)
   // function handle the input change and submit
   const handleName = (event: ChangeEvent<HTMLInputElement>) => {
     nameSetter(event.target.value);
@@ -30,10 +30,6 @@ function SubmitTasks(props: submitTasksProps) {
   const handleInterest = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     interestSetter(parseInt(value));
-  }
-  const handleType = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setType(parseInt(value));
   }
   const handleSubmit = () => {
     const body = {
@@ -54,7 +50,7 @@ function SubmitTasks(props: submitTasksProps) {
   }
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow} className='medium-button' >
         add new tasks
       </Button>
 
@@ -75,8 +71,6 @@ function SubmitTasks(props: submitTasksProps) {
             <Form.Control type="confident rate" onChange={handleConfident} />
             <Form.Label htmlFor="inputInterest">intereset</Form.Label>
             <Form.Control type="Interest rate" onChange={handleInterest} />
-            <Form.Label htmlFor="inputType">Type</Form.Label>
-            <Form.Control type="Type of task" onChange={handleType} />
             <div style={{ marginTop: '20px' }}>
               Date
             </div>

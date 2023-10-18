@@ -3,6 +3,7 @@ import { get } from "../../utilities";
 import listSchema from "../../../../shared/Lists";
 import ListBlock from "./ListBlock";
 import SubmitLists from "./SubmitLists";
+import "../../utilities.css"
 
 
 export default function Schedule() {
@@ -14,6 +15,10 @@ export default function Schedule() {
     }, []);
     let listList: React.ReactNode | null = null;
     const haveLists: boolean = listObject.length !== 0;
+
+    const addNewList =(list)=>{
+      listObjectSetter(listObject.concat(list));
+    }
     if (haveLists) {
         listList = listObject.map((task: listSchema) => (
             <ListBlock
@@ -26,8 +31,8 @@ export default function Schedule() {
     }
     return (
 
-        <div>
-            <SubmitLists />
+        <div className="container">
+            <SubmitLists addNewList={addNewList}/>
             {listList}
         </div>
     );

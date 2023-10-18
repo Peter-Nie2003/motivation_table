@@ -5,7 +5,11 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { post } from '../../utilities';
 
-function SubmitLists() {
+interface SubmitLists{
+  addNewList:(newList)=>void;
+}
+
+function SubmitLists(props:SubmitLists) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -18,7 +22,8 @@ function SubmitLists() {
         const body = {
             name: name,
         }
-        post('/api/addNewList', body);
+        post('/api/addNewList', body).then((newList)=>{props.addNewList(newList)});
+        
     }
     async function handleSubmitButton() {
         await handleSubmit();
@@ -26,7 +31,7 @@ function SubmitLists() {
     }
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={handleShow} className='medium-button'>
                 Launch demo modal
             </Button>
 

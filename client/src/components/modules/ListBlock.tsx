@@ -3,6 +3,8 @@ import { get } from "../../utilities";
 import taskSchema from "../../../../shared/Tasks";
 import TaskCard from "./TaskCard";
 import SubmitTasks from "./SubmitTasks";
+import "../../utilities.css"
+import ListGroup from 'react-bootstrap/ListGroup';
 
 interface ListBlockProps {
   name: string,
@@ -15,7 +17,7 @@ function ListBlock(props: ListBlockProps) {
     get("/api/task", { name: props.name }).then((list) => {
       setList(list);
     })
-  });
+  },[]);
 
   let todoList: React.ReactNode | null = null;
   const havetask: boolean = List.length !== 0;
@@ -36,12 +38,15 @@ function ListBlock(props: ListBlockProps) {
   }
 
   return (
-    <div>
+    <div className="component">
       {props.name}
       <SubmitTasks
         id={props.name}
       />
-      {todoList}
+      <ListGroup>
+        {todoList}
+      </ListGroup>
+      
     </div>
 
   )
