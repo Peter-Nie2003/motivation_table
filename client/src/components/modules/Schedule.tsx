@@ -15,6 +15,10 @@ export default function Schedule() {
     }, []);
     let listList: React.ReactNode | null = null;
     const haveLists: boolean = listObject.length !== 0;
+
+    const addNewList =(list)=>{
+      listObjectSetter(listObject.concat(list));
+    }
     if (haveLists) {
         listList = listObject.map((task: listSchema) => (
             <ListBlock
@@ -28,7 +32,7 @@ export default function Schedule() {
     return (
 
         <div className="container">
-            <SubmitLists />
+            <SubmitLists addNewList={addNewList}/>
             {listList}
         </div>
     );
