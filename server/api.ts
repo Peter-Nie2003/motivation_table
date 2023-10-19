@@ -31,7 +31,6 @@ router.get("/task", async (req: Request<{}, {}, {}, foo>, res: Response) => {
   const tasks = await tasksObject.find(
     q
   );
-
   tasks.sort(compareFun);
   res.send(tasks);
 })
