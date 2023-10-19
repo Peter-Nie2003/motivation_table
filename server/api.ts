@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import tasksObject from "./models/Tasks";
+import tasksObject, { taskSchema } from "./models/Tasks";
 import listObject from "./models/Lists";
 import { database } from "./server";
 const router = express.Router();
@@ -15,12 +15,24 @@ router.get("/tasks", (req: Request, res: Response) => {
 interface foo {
   name: string;
 }
+
 router.get("/task", async (req: Request<{}, {}, {}, foo>, res: Response) => {
+  function compareFun(a: taskSchema, b: taskSchema) {
+    if (a.value > b.value) {
+      return 1;
+    }
+    else if (b.value > a.value) {
+      return -1;
+    }
+    return 0;
+  }
   const { query } = req;
   const q = { workSpace: query.name }
   const tasks = await tasksObject.find(
     q
   );
+
+  tasks.sort(compareFun);
   res.send(tasks);
 })
 
